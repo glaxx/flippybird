@@ -2,6 +2,7 @@
 *.o
 *.a
 *.so
+flippybird
 
 # Folders
 _obj
