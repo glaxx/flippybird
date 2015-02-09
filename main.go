@@ -45,10 +45,12 @@ func main() {
 
 	udpaddr, err := net.ResolveUDPAddr("udp", *addr)
 	if err != nil {
+		termbox.Close()
 		log.Panicln(err)
 	}
 	conn, err := net.DialUDP(udpaddr.Network(), nil, udpaddr)
 	if err != nil {
+		termbox.Close()
 		log.Panicln(err)
 	}
 	defer conn.Close()
