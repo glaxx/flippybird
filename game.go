@@ -89,6 +89,7 @@ func (g *Game) Tick() {
 			return
 		}
 		g.gameObjs[i].Tick()
+		/*
 		if g.gameObjs[i].GetX() < -TUBEWIDTH {
 			temp := append(g.gameObjs[i+1:])
 			temp2 := append(g.gameObjs[:i])
@@ -97,12 +98,12 @@ func (g *Game) Tick() {
 				g.gameObjs = append(g.gameObjs, temp2[j])
 			}
 			break
-		}
+		}*/
 	}
 	if g.nexttube <= 0 {
-		g.nexttube += 5 + TUBEWIDTH
+		g.nexttube += 9 + rand.Intn(23) + TUBEWIDTH
 		offset := g.gameObjs[len(g.gameObjs)-1].GetOffset()
-		offset += rand.Intn(10) - 5 // Range -4 - 5
+		offset += rand.Intn(13) - 5 // Range -4 - 5
 		if offset >= Y-5 || offset < 0 {
 			offset = g.gameObjs[len(g.gameObjs)-1].GetOffset()
 		}
