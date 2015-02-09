@@ -102,8 +102,11 @@ func (g *Game) Tick() {
 	if g.nexttube <= 0 {
 		g.nexttube += 5 + TUBEWIDTH
 		offset := g.gameObjs[len(g.gameObjs)-1].GetOffset()
-		r := rand.Intn(10) - 5 // Range -4 - 5
-		g.AddGameObject(NewTube(offset + r))
+		offset += rand.Intn(10) - 5 // Range -4 - 5
+		if offset >= Y-5 || offset < 0 {
+			offset = g.gameObjs[len(g.gameObjs)-1].GetOffset()
+		}
+		g.AddGameObject(NewTube(offset))
 	}
 	g.nexttube--
 	for i := 1; i != len(g.gameObjs); i++ {
