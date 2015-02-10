@@ -20,18 +20,18 @@
 package main
 
 import (
- //"log"
- "math/rand"
+	//"log"
+	"math/rand"
 )
 
 var X, Y int
 
 type Game struct {
-	passedTubes   int
-	nexttube  int
-	gameObjs  []Gameobject
-	gameboard Gameboard
-	Ended bool
+	passedTubes int
+	nexttube    int
+	gameObjs    []Gameobject
+	gameboard   Gameboard
+	Ended       bool
 }
 
 func NewGame(x, y int) *Game {
@@ -51,8 +51,8 @@ func (g *Game) GetPassedTubes() int {
 func (g *Game) Draw() {
 	g.gameboard.Clear()
 	if g.gameObjs[0].GetY() > Y {
-			g.Ended = true
-			return
+		g.Ended = true
+		return
 	}
 	for i := len(g.gameObjs) - 1; i >= 0; i-- {
 		if g.gameObjs[i].GetY() < 0 {
@@ -90,15 +90,15 @@ func (g *Game) Tick() {
 		}
 		g.gameObjs[i].Tick()
 		/*
-		if g.gameObjs[i].GetX() < -TUBEWIDTH {
-			temp := append(g.gameObjs[i+1:])
-			temp2 := append(g.gameObjs[:i])
-			g.gameObjs = append(temp)
-			for j := 0; j != len(temp2); j++ {
-				g.gameObjs = append(g.gameObjs, temp2[j])
-			}
-			break
-		}*/
+			if g.gameObjs[i].GetX() < -TUBEWIDTH {
+				temp := append(g.gameObjs[i+1:])
+				temp2 := append(g.gameObjs[:i])
+				g.gameObjs = append(temp)
+				for j := 0; j != len(temp2); j++ {
+					g.gameObjs = append(g.gameObjs, temp2[j])
+				}
+				break
+			}*/
 	}
 	if g.nexttube <= 0 {
 		g.nexttube += 9 + rand.Intn(23) + TUBEWIDTH

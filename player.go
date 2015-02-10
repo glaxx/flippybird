@@ -20,41 +20,40 @@
 package main
 
 import (
- "math/rand"
+	"math/rand"
 )
 
 type Player struct {
-	y   int
-	speed int
+	y      int
+	speed  int
 	sprite [][]byte
 }
 
 func NewPlayer(y int, t bool) *Player {
 	spr := [][]byte{
-			{1},
+		{1},
 	}
 	if t == true {
 		spr = [][]byte{
-			{0,1,1,0},
-			{0,1,1,0},
-			{0,1,1,0},
-			{0,1,1,0},
-			{0,1,1,0},
-			{0,1,1,0},
-			{1,1,1,1},
+			{0, 1, 1, 0},
+			{0, 1, 1, 0},
+			{0, 1, 1, 0},
+			{0, 1, 1, 0},
+			{0, 1, 1, 0},
+			{0, 1, 1, 0},
+			{1, 1, 1, 1},
 		}
-		
+
 	}
-	
+
 	return &Player{y, 1, spr}
 }
 
 func (p *Player) Tick() {
 	p.y++
 	if (p.y - p.speed) >= 0 {
-		p.y -= p.speed	
+		p.y -= p.speed
 	}
-	
 
 	if p.speed >= -1 {
 		p.speed--
@@ -70,7 +69,7 @@ func (p *Player) GetSprite() [][]byte {
 }
 
 func (p *Player) GetX() int {
-	return (X/2)
+	return (X / 2)
 }
 
 func (p *Player) GetY() int {

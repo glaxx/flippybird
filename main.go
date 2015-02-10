@@ -24,9 +24,9 @@ import (
 	"github.com/nsf/termbox-go"
 	"log"
 	"net"
-	"time"
 	"sync"
-//	"fmt"
+	"time"
+	//	"fmt"
 )
 
 var wg sync.WaitGroup
@@ -72,33 +72,33 @@ func main() {
 				select {
 				case ch <- 0:
 					wg.Wait()
-					send_buffer(InttoMsg(*x,*y,g.GetPassedTubes()))
+					send_buffer(InttoMsg(*x, *y, g.GetPassedTubes()))
 					return
 
 				default:
 					wg.Wait()
-					send_buffer(InttoMsg(*x,*y,g.GetPassedTubes()))
-					return 
+					send_buffer(InttoMsg(*x, *y, g.GetPassedTubes()))
+					return
 
 				}
 			case termbox.KeySpace:
-				if (g.Ended == false) {
+				if g.Ended == false {
 					ch <- 1
 				}
-				
+
 			}
 		case termbox.EventError:
 			panic(ev.Err)
 		default:
-			if(g.Ended == true) {
+			if g.Ended == true {
 				wg.Wait()
-				send_buffer(InttoMsg(*x,*y,g.GetPassedTubes()))
+				send_buffer(InttoMsg(*x, *y, g.GetPassedTubes()))
 				return
 			}
 		}
-		if (g.Ended == true) {
+		if g.Ended == true {
 			wg.Wait()
-			send_buffer(InttoMsg(*x,*y,g.GetPassedTubes()))
+			send_buffer(InttoMsg(*x, *y, g.GetPassedTubes()))
 			return
 		}
 	}
@@ -109,8 +109,8 @@ func game(msg chan int, g *Game) {
 	for {
 		time.Sleep(1000 / 13 * time.Millisecond) //TODO
 		select {
-		case val := <- msg:
-			switch(val) {
+		case val := <-msg:
+			switch val {
 			case 0:
 				return
 			case 1:
@@ -119,7 +119,7 @@ func game(msg chan int, g *Game) {
 		default:
 
 		}
-		if (g.Ended == true) {
+		if g.Ended == true {
 			return
 		}
 		g.Draw()
@@ -127,7 +127,7 @@ func game(msg chan int, g *Game) {
 		send_buffer(g.GetBoard())
 
 	}
-	
+
 }
 
 func send_buffer(buffer [][]byte) {
@@ -136,13 +136,13 @@ func send_buffer(buffer [][]byte) {
 			buffer[x][y] = 1
 		}
 	}*/
-	msg := make([]byte, (len(buffer) * len(buffer[0]))/8)
+	msg := make([]byte, (len(buffer)*len(buffer[0]))/8)
 	cnt := 0
 	for y := 0; y != len(buffer[0]); y++ {
 		for x := 0; x != len(buffer); x++ {
 			msg[cnt/8] = msg[cnt/8] << 1
 			msg[cnt/8] |= buffer[x][y]
-			
+
 			cnt++
 		}
 	}
@@ -151,6 +151,7 @@ func send_buffer(buffer [][]byte) {
 		log.Panic(err)
 	}
 }
+
 /*
 func dbg(msg []byte) {
 	for i := 0; i != len(msg); i++ {

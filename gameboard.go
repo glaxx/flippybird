@@ -19,12 +19,10 @@
 
 package main
 
-import (
-
-)
+import ()
 
 type Gameboard struct {
-	board [][]byte
+	board     [][]byte
 	Collision bool
 }
 
@@ -53,5 +51,3 @@ func (g *Gameboard) SetPixel(x, y int, b byte) {
 func (g *Gameboard) GetBoard() [][]byte {
 	return g.board
 }
-
-

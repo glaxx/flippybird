@@ -20,7 +20,7 @@
 package main
 
 import (
- 	//"math/rand"
+//"math/rand"
 )
 
 const (
@@ -38,9 +38,9 @@ func NewTube(offset int) *Tube {
 	for x := 0; x != len(spr); x++ {
 		spr[x] = make([]byte, Y)
 		for y := 0; y != len(spr[0]); y++ {
-			if y == offset || y == offset + 5 {
+			if y == offset || y == offset+5 {
 				spr[x][y] = 1
-			} else if x == 0 || x == 3 || y == offset + 1 || y == offset + 2 || y == offset + 3 || y == offset + 4 {
+			} else if x == 0 || x == 3 || y == offset+1 || y == offset+2 || y == offset+3 || y == offset+4 {
 				spr[x][y] = 0
 			} else {
 				spr[x][y] = 1
