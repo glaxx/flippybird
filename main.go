@@ -148,6 +148,7 @@ func send_buffer(buffer [][]byte) {
 	}
 	_, err := CONN.Write(msg)
 	if err != nil {
+		termbox.Close()
 		log.Panic(err)
 	}
 }
